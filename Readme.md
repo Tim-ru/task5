@@ -1,11 +1,14 @@
-### Develop
+### Develop only typescript
 #### prepare
 1. setting your system by react-native guide https://reactnative.dev/docs/environment-setup
 #### config
 1. copy .env.example as .env
 2. change variables
+	1. replace q_digital_core to yourappname
 3. npm install
 	1. for ios `cd ios && pod install && cd ../`
+	2. `react-native link @react-native-community/async-storage`
+	3. https://github.com/oblador/react-native-vector-icons#installation
 3. `npm run start`
 4. `npm run android` or `npm run ios`
 
