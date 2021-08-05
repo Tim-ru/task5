@@ -1,18 +1,25 @@
 ### Develop only typescript
 #### prepare
 1. setting your system by react-native guide https://reactnative.dev/docs/environment-setup
-#### config
-1. copy .env.example as .env
-2. change variables
-	1. replace q_digital_core to yourappname
-3. npm install
-	1. for ios `cd ios && pod install && cd ../`
-	2. `react-native link @react-native-community/async-storage`
-	3. https://github.com/oblador/react-native-vector-icons#installation
-3. `npm run start`
-4. `npm run android` or `npm run ios`
+### starting new project
+1. `git clone https://git-storage.osora.ru/q-digital-core.git`
+2. rename cloned repos to yourappname
+3. `npx react-native-cli init yourappname --template react-native-template-typescript`
+4. `cd yourappname`
+5. `git add ios android`
+6. `git commit -m 'fork core'`
+7. `git clean -f -d ./`
+8. copy .env.example as .env
+9. replace all q-digital-core to yourappname
+10. `npm i`
+11. `react-native link @react-native-community/async-storage`
+12. `https://github.com/oblador/react-native-vector-icons#installation`
 
-#### aliases
+### Dev
+1. `npm run start`
+2. `npm run android` or `npm run ios`
+
+#### aliases for crop paths
 1. babel.config.js
 2. tsconfig.json
 
