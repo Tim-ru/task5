@@ -1,24 +1,24 @@
 ### Develop only typescript
 #### prepare
 1. setting your system by react-native guide https://reactnative.dev/docs/environment-setup
+2. install yarn https://classic.yarnpkg.com/en/docs/install/#mac-stable
 ### starting new project
-1. `git clone https://git-storage.osora.ru/q-digital-core.git`
-2. rename cloned repos to yourappname
-3. `npx react-native-cli init yourappname --template react-native-template-typescript`
-4. `cd yourappname`
-5. `git add ios android`
-6. `git commit -m 'fork core'`
-7. `git clean -f -d ./`
-8. `git reset --hard HEAD`
+1. `git clone https://git-storage.osora.ru/q-digital-core.git yourappname`
+2. `npx react-native-cli init yourappname`
+3. `cd yourappname`
+4. `git add ios android`
+5. `git commit -m 'core'`
+6. `git clean -f -d ./`
+7. `git reset --hard HEAD`
 8. copy .env.example as .env
 9. replace all q-digital-core to yourappname in VS Code find by folder
-10. `npm i`
+10. `yarn i`
 11. `npx react-native link @react-native-community/async-storage`
 12. `https://github.com/oblador/react-native-vector-icons#installation` - optional
 
 ### Dev
-1. `npm run start`
-2. `npm run android` or `npm run ios`
+1. `yarn start`
+2. `yarn android` or `yarn ios`
 
 #### aliases for crop paths
 1. babel.config.js
