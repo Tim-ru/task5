@@ -12,7 +12,7 @@
 7. `git reset --hard HEAD`
 8. copy .env.example as .env
 9. replace all q-digital-core to yourappname in VS Code find by folder
-10. `yarn i`
+10. `yarn`
 11. `npx react-native link @react-native-community/async-storage`
 12. `https://github.com/oblador/react-native-vector-icons#installation` - optional
 
