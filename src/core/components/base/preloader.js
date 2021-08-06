@@ -4,26 +4,13 @@ import React from 'react';
 import { View } from 'react-native';
 import { tailwind, getColor } from '@tailwind';
 import Helpers from '@core/helpers';
-import { connect } from 'react-redux';
-import Actions from '@core/generated/actions'
 
-export class Preloader extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      rotate: 0,
-    };
-    this.timeout = false;
+export class Spinner extends React.Component {
+  timeout;
+
+  state = {
+    rotate: 0
   }
-
-  updateRotate = () => {
-    clearTimeout(this.timeout);
-    let { rotate } = this.state;
-    rotate += 10;
-    if (rotate > 360) rotate = 0;
-    this.setState({ rotate });
-    this.timeout = setTimeout(this.updateRotate, 10);
-  };
 
   componentDidMount() {
     this.updateRotate();
@@ -33,8 +20,27 @@ export class Preloader extends React.Component {
     clearTimeout(this.timeout);
   }
 
+  updateRotate = () => {
+    clearTimeout(this.timeout);
+    this.setState({ rotate: this.state.rotate + 10 })
+    this.timeout = setTimeout(this.updateRotate, 10)
+  }
+
   render() {
-    const { rotate } = this.state;
+    const { size } = this.props;
+    return (
+      <FontAwesomeIcon
+        style={tailwind('text-white')}
+        icon={faSpinner}
+        transform={{ rotate: this.state.rotate }}
+        size={size}
+      />
+    )
+  }
+}
+
+export class Preloader extends React.Component {
+  render() {
     return (
       <View
         style={Helpers.setClasses([
@@ -42,12 +48,7 @@ export class Preloader extends React.Component {
           { backgroundColor: getColor('black opacity-50') },
         ])}
       >
-        <FontAwesomeIcon
-          style={tailwind('text-white')}
-          icon={faSpinner}
-          transform={{ rotate }}
-          size={40}
-        />
+        <Spinner size={40} />
       </View>
     );
   }
