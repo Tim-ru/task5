@@ -11,13 +11,8 @@ import Form from '@core/components/base/form';
 import ImageOverlay from '@core/components/base/imageOverlay'
 import Routes from '@core/generated/routes'
 import Button from '../../core/components/base/form/elements/button';
-import Helpers from '@helpers'
-import Preloader from '@core/components/base/preloader';
-import { setPreloader } from '@core/generated/actions';
-import launch_screen from './launch_screen';
 
-
-export class AuthSignin extends Page {
+export class AuthSignup extends Page {
   constructor(_props) {
     super(_props);
 
@@ -31,24 +26,27 @@ export class AuthSignin extends Page {
         name: 'email',
       },
       {
-        elementType: Form.BaseElementTypes.Password,
-        validation: Form.Validation.password,
-        textStyle: tailwind('pr-12'),
-        status: 'control',
-        name: 'password',
-        style: tailwind('mt-4'),
+        elementType: Form.BaseElementTypes.Confirm_password,
+        password: {
+          validation: Form.Validation.password,
+          elementType: Form.BaseElementTypes.Password,
+          textStyle: tailwind('pr-12'),
+          name: 'password',
+          status: 'control',
+          style: tailwind('mt-4'),
+        },
+        confirm: {
+          validation: Form.Validation.confirm_password_front,
+          textStyle: tailwind('pr-12'),
+          name: 'confirm_password',
+          status: 'control',
+          style: tailwind('mt-4 mb-4'),
+        }
       },
-      {
-        elementType: Form.BaseElementTypes.Button,
-        title: 'Забыли пароль?',
-        style: tailwind('px-0 ml-auto mb-4'),
-        appearance: "ghost",
-        status: "control",
-        onPress: () => this.go(Routes.launch.screen)
-      },
+      
       {
         elementType: Form.BaseElementTypes.Submit,
-        title: 'Войти',
+        title: 'Создать аккаунт',
         style: tailwind('mt-auto'),
         status: "control",
         size: "giant",
@@ -56,23 +54,19 @@ export class AuthSignin extends Page {
       },
       {
         elementType: Form.BaseElementTypes.Button,
-        title: 'У меня еще нет аккаунта',
+        title: 'У меня eсть аккаунт',
         style: tailwind('mx-4 my-3'),
         status: "control",
         appearance: "ghost",
-        onPress: () => this.go(Routes.auth.signup)
+        onPress: () => this.go(Routes.auth.signin)
       },
     ];
   }
 
-  onSubmit = async ({ body }) => {
+  onSubmit = ({ body }) => {
     console.log(body);
-    if (body) {
-      this.props.setPreloader(true)
-      setTimeout(() => {
-        this.props.setPreloader(false)
-        this.go(Routes.main.home)
-      }, 2000);
+    if (body.password === body.confirm_password ) {
+      this.go(Routes.main.home)
     }
   }
 
@@ -87,13 +81,19 @@ export class AuthSignin extends Page {
             }}
           >
             <Text style={tailwind('mt-4')} category="s1" status="control">
-              Авторизация
+              Регистрация
             </Text>
           </View>
           <Form
             wrapperProps={{ style: tailwind('flex-1 mt-8 px-4') }}
             elements={this.state.elements}
           />
+          <Button element={{
+            title: "Галлерея",
+            onPress: () => {
+              this.props.setImageViewer({ images: ['https://crm.q-digital.org/assets/gentelella/public/images/logo.png', 'https://crm.q-digital.org/assets/gentelella/public/images/logo.png'], id: 0 })
+            }
+          }} />
           {/* <Button element={{
             title: "alert",
             onPress: () => {
@@ -157,4 +157,4 @@ export class AuthSignin extends Page {
   }
 }
 
-export default connect(Page.mapStateToProps, Page.mapDispatchToProps)(AuthSignin);
+export default connect(Page.mapStateToProps, Page.mapDispatchToProps)(AuthSignup);

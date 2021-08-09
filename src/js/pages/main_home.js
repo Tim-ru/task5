@@ -11,11 +11,6 @@ import Form from '@core/components/base/form';
 import ImageOverlay from '@core/components/base/imageOverlay'
 import Routes from '@core/generated/routes'
 import Button from '../../core/components/base/form/elements/button';
-import Helpers from '@helpers'
-import Preloader from '@core/components/base/preloader';
-import { setPreloader } from '@core/generated/actions';
-import launch_screen from './launch_screen';
-
 
 export class AuthSignin extends Page {
   constructor(_props) {
@@ -23,28 +18,17 @@ export class AuthSignin extends Page {
 
     this.state.elements = [
       {
-        validation: Form.Validation.email,
         elementType: Form.BaseElementTypes.Input,
-        label: 'E-mail',
         status: 'control',
-        placeholder: 'mail@mail.ru',
-        name: 'email',
+        placeholder: 'Тема',
+        name: 'theme',
       },
       {
-        elementType: Form.BaseElementTypes.Password,
-        validation: Form.Validation.password,
-        textStyle: tailwind('pr-12'),
+        elementType: Form.BaseElementTypes.Input,
         status: 'control',
-        name: 'password',
-        style: tailwind('mt-4'),
-      },
-      {
-        elementType: Form.BaseElementTypes.Button,
-        title: 'Забыли пароль?',
-        style: tailwind('px-0 ml-auto mb-4'),
-        appearance: "ghost",
-        status: "control",
-        onPress: () => this.go(Routes.launch.screen)
+        placeholder: 'Описание',
+        name: 'theme',
+        style: tailwind('mt-10'),
       },
       {
         elementType: Form.BaseElementTypes.Submit,
@@ -54,26 +38,12 @@ export class AuthSignin extends Page {
         size: "giant",
         onPress: this.onSubmit
       },
-      {
-        elementType: Form.BaseElementTypes.Button,
-        title: 'У меня еще нет аккаунта',
-        style: tailwind('mx-4 my-3'),
-        status: "control",
-        appearance: "ghost",
-        onPress: () => this.go(Routes.auth.signup)
-      },
+      
     ];
   }
 
-  onSubmit = async ({ body }) => {
-    console.log(body);
-    if (body) {
-      this.props.setPreloader(true)
-      setTimeout(() => {
-        this.props.setPreloader(false)
-        this.go(Routes.main.home)
-      }, 2000);
-    }
+  onSubmit = ({ data }) => {
+      console.log(data);
   }
 
   render() {
@@ -87,13 +57,26 @@ export class AuthSignin extends Page {
             }}
           >
             <Text style={tailwind('mt-4')} category="s1" status="control">
-              Авторизация
+              main
             </Text>
           </View>
           <Form
+            url={`${BASEURL}:${PORT}/user/signin`}
             wrapperProps={{ style: tailwind('flex-1 mt-8 px-4') }}
             elements={this.state.elements}
           />
+          <Button element={{
+            title: "select",
+            onPress: () => {
+              this.props.setSelect({
+                list: [
+                  { title: 'Общая', value: 'common' },
+                  { title: 'Приватная', value: 'private' },
+                ],
+                onChange: (value) => false,
+              });
+            }
+          }} />
           {/* <Button element={{
             title: "alert",
             onPress: () => {

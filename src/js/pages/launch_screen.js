@@ -1,14 +1,16 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import Page from '@core/components/abstract/page'
-import { tailwind } from '@tailwind';
+import { tailwind, getColor } from '@tailwind';
 import Routes from '@core/generated/routes';
 import { connect } from 'react-redux';
 import Helpers from '@core/helpers';
+import { Spinner } from '@core/components/base/preloader';
 
 export class LaunchScreen extends Page {
   componentDidMount() {
     this.authProccess()
+    console.log('asdasda');
   }
 
   authProccess = () => {
@@ -17,8 +19,16 @@ export class LaunchScreen extends Page {
 
   render() {
     return (
-      <View style={tailwind('justify-center items-center flex-1')}>
-        <Text style={tailwind('mb-4')}>LaunchScreen</Text>
+      <View
+        style={Helpers.setClasses([
+          tailwind('justify-center items-center w-full h-full absolute z-50'),
+          { backgroundColor: getColor('black opacity-50') },
+        ])}
+      >
+        <Text style={tailwind('mt-4')} category="s1" status="control">
+          Q-digital-core
+        </Text>
+        <Spinner size={40} />
       </View>
     )
   }
