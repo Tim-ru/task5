@@ -11,6 +11,9 @@ export class Model extends Network() {
   get config() {
     return {};
   }
+  get view() {
+    return false;
+  }
   public id!: number | undefined;
   public data!: any | undefined;
   #onLoad: Function | undefined;
@@ -60,6 +63,10 @@ export class Model extends Network() {
 
   public delete = async () => {
     return this.request(this.config.delete);
+  }
+
+  public render = (): JSX.Element | boolean => {
+    return this.view
   }
 }
 
