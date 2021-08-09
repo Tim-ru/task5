@@ -1,4 +1,4 @@
-export function fetch_({ url, method, body, ignoreDisablePreloader }, setPreloader) {
+export function fetch_({ url, method, headers, body, ignoreDisablePreloader }, setPreloader) {
   if (typeof setPreloader !== 'function') {
     if (setPreloader !== false) {
       console.warn(
@@ -15,8 +15,9 @@ export function fetch_({ url, method, body, ignoreDisablePreloader }, setPreload
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        ...headers,
       },
-      body: JSON.stringify(body),
+      ...(method.toUpperCase() === 'POST' ? { body: JSON.stringify(body) } : {}),
     })
       .then((res) => res.json())
       .then(res => {
