@@ -17,7 +17,7 @@ export function fetch_({ url, method, headers, body, ignoreDisablePreloader }, s
         'Content-Type': 'application/json',
         ...headers,
       },
-      body: JSON.stringify(body),
+      ...(method.toUpperCase() === 'POST' ? { body: JSON.stringify(body) } : {}),
     })
       .then((res) => res.json())
       .then(res => {
