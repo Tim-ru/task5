@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View, Image, ScrollView, TouchableOpacity, ImageBackground, Alert } from 'react-native';
 import { Text } from '@ui-kitten/components';
 import KeyboardAvoidingView from '@core/components/base/keyboardAvoidingView';
 import { tailwind } from '@tailwind';
@@ -14,6 +14,10 @@ import Button from '../../core/components/base/form/elements/button';
 import Select from '@core/components/base/form/elements/select';
 import imageViewer from '@core/components/base/imageViewer';
 import { setImageViewer } from '@core/generated/actions';
+import Icon from '@core/components/base/icon';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+// import { Button } from '@ui-kitten/components';
 
 export class AuthSignin extends Page {
   constructor(_props) {
@@ -48,14 +52,7 @@ export class AuthSignin extends Page {
         name: 'theme',
         style: tailwind('mt-10'),
       },
-      {
-        elementType: Form.CustomElementTypes.imageViewer,
-        status: 'control',
-        name: 'theme',
-        style: tailwind('mt-10'),
-        title: "Галлерея",
-        
-      },
+
       {
         elementType: Form.BaseElementTypes.Submit,
         title: 'Отправить',
@@ -71,6 +68,46 @@ export class AuthSignin extends Page {
   onSubmit = ({ data }) => {
     console.log(data);
   }
+
+  addPhotoMenu = () => {
+    this.props.setPopupMenu({
+      title: 'Выберите действие:',
+      groups: [
+        {
+          list: [
+            { title: 'Выбрать из галереи', onPress: () => {
+              return
+            } },
+            { title: 'Сделать фото' },
+            { title: 'Отменить изменения', onPress: () => false },
+          ],
+        },
+      ],
+    });
+  }
+
+  openPhoto = () => {
+    this.props.setImageViewer({ images: ['https://crm.q-digital.org/assets/gentelella/public/images/logo.png', 'https://crm.q-digital.org/assets/gentelella/public/images/logo.png'], id: 0 })
+  }
+
+  alert = () => {
+    this.props.setAlert({
+      title: 'Удалить фото?',
+      buttons: [
+        {
+          text: 'Да',
+          onPress: async () => {
+          },
+        },
+        {
+          text: 'Нет',
+          style: tailwind('text-red'),
+        },
+      ],
+    });
+  }
+
+
 
   render() {
     return this._render(
@@ -91,75 +128,60 @@ export class AuthSignin extends Page {
             elements={this.state.elements}
           />
 
-          {/* <Button element={{
-            title: "select",
-            onPress: () => {
-              this.props.setSelect({
-                list: [
-                  { title: 'Общая', value: 'common' },
-                  { title: 'Приватная', value: 'private' },
-                ],
-                onChange: (value) => false,
-              });
-            }
-          }} /> */}
-          {/* <Button element={{
-            title: "alert",
-            onPress: () => {
-              this.props.setAlert({
-                title: 'Удалить комментарий?',
-                buttons: [
-                  {
-                    text: 'Да',
-                    onPress: async () => {
-                    },
-                  },
-                  {
-                    text: 'Нет',
-                    style: tailwind('text-red'),
-                  },
-                ],
-              });
-            }
-          }} />
+          <View style={tailwind('justify-center items-center pt-4 pb-4 border-gray-400 border-t-2 border-b-2')}>
+            <ScrollView horizontal={true}>
+              <View style={tailwind('relative h-24 w-28 mr-2')}>
+                <TouchableOpacity
+                  style={tailwind('justify-center items-center h-24 w-28')}
+                  onPress={this.addPhotoMenu}
+                >
+                  <Icon
+                    name='plus'
+                    size={30}
+                  />
+                </TouchableOpacity>
+              </View>
 
-          <Button element={{
-            title: "select",
-            onPress: () => {
-              this.props.setSelect({
-                list: [
-                  { title: 'Дубликат', value: 'dublicate' },
-                  { title: 'В работе', value: 'inwork' },
-                ],
-                onChange: (value) => false,
-              });
-            }
-          }} />
+              <View style={tailwind('relative h-24 w-28 mr-2')}>
+                <TouchableOpacity onPress={this.openPhoto}>
+                  <ImageBackground style={tailwind('h-24 w-28 z-0')} source={require('../style/0.jpg')}>
+                    <TouchableOpacity style={tailwind('absolute right-0 top-0')} onPress={this.alert} >
+                      <Icon
+                        name='close'
+                        size={30}
+                      />
+                    </TouchableOpacity>
+                  </ImageBackground>
+                </TouchableOpacity>
+              </View>
 
-          <Button element={{
-            title: "popup",
-            onPress: () => {
-              this.props.setPopupMenu({
-                title: 'Выберите действие:',
-                groups: [
-                  {
-                    list: [
-                      { title: 'Сохранить', onPress: () => false },
-                      { title: 'Вернуться к редактированию' },
-                      { title: 'Отменить изменения', onPress: () => false },
-                    ],
-                  },
-                ],
-              });
-            }
-          }} />
+              <View style={tailwind('relative h-24 w-28 mr-2')}>
+                <ImageBackground style={tailwind('h-24 w-28 z-0')} source={require('../style/0.jpg')}>
+                  <TouchableOpacity style={tailwind('absolute right-0 top-0')} onPress={this.alert} >
+                    <Icon
+                      name='close'
+                      size={30}
+                    />
+                  </TouchableOpacity>
+                </ImageBackground>
+              </View>
 
-          <Button element={{
-            title: "Галлерея",
-            onPress: () => {
-              this.props.setImageViewer({ images: ['https://crm.q-digital.org/assets/gentelella/public/images/logo.png', 'https://crm.q-digital.org/assets/gentelella/public/images/logo.png'], id: 0 })
-            }
-          }} /> */}
+              <View style={tailwind('relative h-24 w-28 ')}>
+                <ImageBackground style={tailwind('h-24 w-28 z-0')} source={require('../style/0.jpg')}>
+                  <TouchableOpacity style={tailwind('absolute right-0 top-0')} onPress={this.alert} >
+                    <Icon
+                      name='close'
+                      size={30}
+                    />
+                  </TouchableOpacity>
+                </ImageBackground>
+              </View>
+
+            </ScrollView>
+          </View>
+
+          
+
         </ImageOverlay>
       </KeyboardAvoidingView>,
     );
