@@ -12,6 +12,8 @@ target 'task5' do
     :hermes_enabled => false
   )
 
+  pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
+
   target 'task5Tests' do
     inherit! :complete
     # Pods for testing
