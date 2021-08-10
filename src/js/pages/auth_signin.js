@@ -14,7 +14,8 @@ import Button from '../../core/components/base/form/elements/button';
 import Helpers from '@helpers'
 import Preloader from '@core/components/base/preloader';
 import { setPreloader } from '@core/generated/actions';
-import launch_screen from './launch_screen';
+import LaunchScreen from './launch_screen';
+import { setAlert } from '@core/generated/actions';
 
 
 export class AuthSignin extends Page {
@@ -44,7 +45,7 @@ export class AuthSignin extends Page {
         style: tailwind('px-0 ml-auto mb-4'),
         appearance: "ghost",
         status: "control",
-        onPress: () => this.go(Routes.launch.screen)
+        onPress: () => this.go(Routes.main.home)
       },
       {
         elementType: Form.BaseElementTypes.Submit,
@@ -66,14 +67,31 @@ export class AuthSignin extends Page {
   }
 
   onSubmit = async ({ body }) => {
-    console.log(body);
-    if (body) {
+    let url = 'https://imagesapi.osora.ru/';
+    let storePassword = await Helpers.Store.get(body.email)
+    if (body.password === storePassword) {
       this.props.setPreloader(true)
-      setTimeout(() => {
-        this.props.setPreloader(false)
-        this.go(Routes.main.home)
-      }, 2000);
+      Helpers.fetch(url)
+        .then(response => {
+          console.log(response);
+          setTimeout(() => {
+            this.props.setPreloader(false)
+            this.go(Routes.main.home)
+          }, 2000)
+
+        })
     }
+    //  else {
+    //   this.props.setAlert({
+    //     title: 'Неверный пароль!',
+    //     buttons: [
+    //       {
+    //         text: 'Ок',
+    //         style: tailwind('text-red'),
+    //       },
+    //     ],
+    //   });
+    // }
   }
 
   render() {

@@ -11,6 +11,9 @@ import Form from '@core/components/base/form';
 import ImageOverlay from '@core/components/base/imageOverlay'
 import Routes from '@core/generated/routes'
 import Button from '../../core/components/base/form/elements/button';
+import Select from '@core/components/base/form/elements/select';
+import imageViewer from '@core/components/base/imageViewer';
+import { setImageViewer } from '@core/generated/actions';
 
 export class AuthSignin extends Page {
   constructor(_props) {
@@ -24,6 +27,21 @@ export class AuthSignin extends Page {
         name: 'theme',
       },
       {
+        elementType: Form.BaseElementTypes.Button,
+        title: 'Тема',
+        name: 'select',
+        style: tailwind('mt-5'),
+        onPress: () => {
+          this.props.setSelect({
+            list: [
+              { title: 'Общая', value: 'public' },
+              { title: 'Приватная', value: 'private' },
+            ],
+            onChange: (value) => false,
+          });
+        }
+      },
+      {
         elementType: Form.BaseElementTypes.Input,
         status: 'control',
         placeholder: 'Описание',
@@ -31,19 +49,27 @@ export class AuthSignin extends Page {
         style: tailwind('mt-10'),
       },
       {
+        elementType: Form.CustomElementTypes.imageViewer,
+        status: 'control',
+        name: 'theme',
+        style: tailwind('mt-10'),
+        title: "Галлерея",
+        
+      },
+      {
         elementType: Form.BaseElementTypes.Submit,
-        title: 'Войти',
+        title: 'Отправить',
         style: tailwind('mt-auto'),
         status: "control",
         size: "giant",
         onPress: this.onSubmit
       },
-      
+
     ];
   }
 
   onSubmit = ({ data }) => {
-      console.log(data);
+    console.log(data);
   }
 
   render() {
@@ -61,11 +87,11 @@ export class AuthSignin extends Page {
             </Text>
           </View>
           <Form
-            url={`${BASEURL}:${PORT}/user/signin`}
             wrapperProps={{ style: tailwind('flex-1 mt-8 px-4') }}
             elements={this.state.elements}
           />
-          <Button element={{
+
+          {/* <Button element={{
             title: "select",
             onPress: () => {
               this.props.setSelect({
@@ -76,7 +102,7 @@ export class AuthSignin extends Page {
                 onChange: (value) => false,
               });
             }
-          }} />
+          }} /> */}
           {/* <Button element={{
             title: "alert",
             onPress: () => {

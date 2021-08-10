@@ -28,7 +28,7 @@ export class LaunchScreen extends Page {
         <Text style={tailwind('mt-4')} category="s1" status="control">
           Q-digital-core
         </Text>
-        <Spinner size={40} />
+        <Spinner size={100} />
       </View>
     )
   }

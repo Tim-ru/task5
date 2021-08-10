@@ -11,6 +11,7 @@ import Form from '@core/components/base/form';
 import ImageOverlay from '@core/components/base/imageOverlay'
 import Routes from '@core/generated/routes'
 import Button from '../../core/components/base/form/elements/button';
+import Helpers from '@core/helpers';
 
 export class AuthSignup extends Page {
   constructor(_props) {
@@ -63,9 +64,9 @@ export class AuthSignup extends Page {
     ];
   }
 
-  onSubmit = ({ body }) => {
-    console.log(body);
+  onSubmit = async ({ body }) => {
     if (body.password === body.confirm_password ) {
+      Helpers.Store.set(body.email, body.password)
       this.go(Routes.main.home)
     }
   }
