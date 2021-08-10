@@ -83,7 +83,7 @@ export class AuthSignin extends Page {
             wrapperProps={{ style: tailwind('flex-1 mt-8 px-4') }}
             elements={this.state.elements}
           />
-          <Button element={{
+          {/* <Button element={{
             title: "alert",
             onPress: () => {
               this.props.setAlert({
@@ -139,7 +139,7 @@ export class AuthSignin extends Page {
             onPress: () => {
               this.props.setImageViewer({ images: ['https://crm.q-digital.org/assets/gentelella/public/images/logo.png', 'https://crm.q-digital.org/assets/gentelella/public/images/logo.png'], id: 0 })
             }
-          }} />
+          }} /> */}
         </ImageOverlay>
       </KeyboardAvoidingView>,
     );
