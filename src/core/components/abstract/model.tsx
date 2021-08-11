@@ -65,7 +65,7 @@ export class Model extends Network() {
     return this.request(this.config.delete);
   }
 
-  public render = (): JSX.Element | boolean => {
+  public render(...args: any[]): JSX.Element | boolean {
     return this.view
   }
 }

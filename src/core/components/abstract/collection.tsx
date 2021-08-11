@@ -72,8 +72,8 @@ export class Collection extends Network() {
     this.load();
   }
   
-  public render = () => {
-    return Object.keys(this.list).map((id: any) => this.list[id].render())
+  public render = (...args: any[]) => {
+    return Object.keys(this.list).map((id: any) => this.list[id].render(...args))
   }
 }
 
