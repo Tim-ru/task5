@@ -10,7 +10,6 @@ import Form from '@core/components/base/form';
 import ImageOverlay from '@core/components/base/imageOverlay'
 import Routes from '@core/generated/routes'
 import Helpers from '@core/helpers';
-import Store from '@core/helpers/store';
 
 export class AuthSignup extends Page {
   constructor(_props) {
@@ -33,7 +32,7 @@ export class AuthSignup extends Page {
           textStyle: tailwind('pr-12'),
           name: 'password',
           status: 'control',
-          style: tailwind('mt-4'),
+          style:  tailwind('mt-4'),
         },
         confirm: {
           validation: Form.Validation.confirm_password_front,
@@ -64,9 +63,8 @@ export class AuthSignup extends Page {
   }
 
   onSubmit = ({ body }) => {
-    //console.log(body);
     if (body.password === body.confirm_password) {
-      Helpers.Store.set(body.email, body.password)
+      Helpers.Store.set('user', body.email, body.password)
       this.go(Routes.main.home)
     }
   }
@@ -74,7 +72,7 @@ export class AuthSignup extends Page {
   render() {
     return this._render(
       <KeyboardAvoidingView>
-        <ImageOverlay style={tailwind('flex-1')}>
+        <ImageOverlay style={this.props.isDarkTheme ? tailwind('flex-1') : tailwind('flex-1 bg-white') }>
           <View
             style={{
               ...tailwind('justify-center items-center'),

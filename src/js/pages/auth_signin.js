@@ -9,16 +9,12 @@ import style from '../style';
 import Form from '@core/components/base/form';
 import ImageOverlay from '@core/components/base/imageOverlay'
 import Routes from '@core/generated/routes'
-import { setIsAuthorized } from '@core/generated/actions';
-import Store from '@core/helpers/store';
 import Helpers from '@core/helpers';
-import { isAuthorized } from '@configs/reduxInitialState';
 
 export class AuthSignin extends Page {
   constructor(_props) {
     super(_props);
 
-    this.state.isAuthorized = true,
     this.state.elements = [
       {
         validation: Form.Validation.email,
@@ -99,5 +95,4 @@ export class AuthSignin extends Page {
   }
 }
 
-export default connect(Page.mapStateToProps,
-   (dispatch) => Page.mapDispatchToProps(dispatch, {setIsAuthorized}))(AuthSignin);
+export default connect(Page.mapStateToProps, Page.mapDispatchToProps)(AuthSignin);

@@ -5,7 +5,6 @@ module.exports = {
   select: false,
   popupMenu: false,
   imageViewer: false,
-  isDarkTheme: false,
+  isDarkTheme: true,
   // required end
-  isAuthorized: false
 };
