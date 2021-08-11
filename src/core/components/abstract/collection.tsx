@@ -71,8 +71,8 @@ export class Collection extends Network() {
     await this.request(this.config.deleteMultiple, { ids })
     this.load();
   }
-  
-  public render = (...args: any[]) => {
+
+  public render(...args: any[]) {
     return Object.keys(this.list).map((id: any) => this.list[id].render(...args))
   }
 }
