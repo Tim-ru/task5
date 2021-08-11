@@ -1,8 +1,8 @@
 import keysEqualValuesObject from '@helpers/keysEqualValuesObject';
-import imageViewer from '@core/components/base/imageViewer';
+import ImageView from './ImageView';
 
 export const Elements = {
-  imageViewer,
+  ImageView,
 }
 
 export const ElementTypes = keysEqualValuesObject(Elements)
