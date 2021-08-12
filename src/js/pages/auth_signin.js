@@ -60,12 +60,30 @@ export class AuthSignin extends Page {
   }
 
   onSubmit = async ({ body }) => {
-    let storePassword = await Helpers.Store.get(body.email)
-    console.log(body);
-    console.log(storePassword);
-    if (body.password === storePassword) {
-      this.go(Routes.main.home)
+    let userData = {
+      email: body.email,
+      password: body.password
     }
+    await Helpers.Store.set('userAuthorized', JSON.stringify(userData))
+
+    let authData
+
+    let regData
+
+    await Helpers.Store.get('userAuthorized').then((resolve) => {
+      authData = resolve
+    })
+
+    await Helpers.Store.get('userRegistered').then((resolve) => {
+      regData = resolve
+    })
+
+    console.log(authData);
+    console.log(regData);
+
+    
+    
+
   }
 
   render() {
