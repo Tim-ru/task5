@@ -20,6 +20,7 @@ export const customColors = {
   bluredButton: 'rgba(0, 0, 0, .7)',
   yellow: '#f6ce46',
   buttonCard: '#2c2c2e',
+  launchScreenBackground: '#2A3F54',
 };
 
 export default customColors;

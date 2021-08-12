@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, ScrollView, TouchableOpacity, ImageBackground, Alert } from 'react-native';
+import { View } from 'react-native';
 import { Text } from '@ui-kitten/components';
 import KeyboardAvoidingView from '@core/components/base/keyboardAvoidingView';
 import { tailwind } from '@tailwind';
@@ -85,14 +85,22 @@ export class Main extends Page {
                 style={tailwind('bg-transparent p-4 border-t-4 justify-center items-center border-blue-600 w-1/2')}
               >
                 <Link to="/main/home" underlayColor="#f0f4f7">
-                  <Text>Home</Text>
+                  <Text
+                    style={this.props.isDarkTheme ? tailwind('text-white') : tailwind('text-black')}
+                  >
+                    Home
+                  </Text>
                 </Link>
               </View>
               <View
                 style={tailwind('bg-white p-4 justify-center items-center border-t-4  w-1/2')}
               >
                 <Link to="/main/more" underlayColor="#f0f4f7">
-                  <Text>More</Text>
+                <Text
+                    style={this.props.isDarkTheme ? tailwind('text-white') : tailwind('text-black')}
+                  >
+                    More
+                  </Text>
                 </Link>
               </View>
             </View>

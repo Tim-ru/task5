@@ -16,7 +16,6 @@ import Helpers from '@core/helpers';
 export class AuthSignup extends Page {
   constructor(_props) {
     super(_props);
-
     this.state.elements = [
       {
         validation: Form.Validation.email,
@@ -34,7 +33,7 @@ export class AuthSignup extends Page {
           textStyle: tailwind('pr-12'),
           name: 'password',
           status: 'control',
-          style: tailwind('mt-4'),
+          style:  tailwind('mt-4'),
         },
         confirm: {
           validation: Form.Validation.confirm_password_front,
@@ -44,7 +43,6 @@ export class AuthSignup extends Page {
           style: tailwind('mt-4 mb-4'),
         }
       },
-      
       {
         elementType: Form.BaseElementTypes.Submit,
         title: 'Создать аккаунт',
@@ -64,9 +62,9 @@ export class AuthSignup extends Page {
     ];
   }
 
-  onSubmit = async ({ body }) => {
-    if (body.password === body.confirm_password ) {
-      Helpers.Store.set(body.email, body.password)
+  onSubmit = ({ body }) => {
+    if (body.password === body.confirm_password) {
+      Helpers.Store.set('user', body.email, body.password)
       this.go(Routes.main.home)
     }
   }
@@ -74,7 +72,7 @@ export class AuthSignup extends Page {
   render() {
     return this._render(
       <KeyboardAvoidingView>
-        <ImageOverlay style={tailwind('flex-1')}>
+        <ImageOverlay style={this.props.isDarkTheme ? tailwind('flex-1') : tailwind('flex-1 bg-white') }>
           <View
             style={{
               ...tailwind('justify-center items-center'),

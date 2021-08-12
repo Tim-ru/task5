@@ -1,22 +1,15 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View } from 'react-native';
 import { Text } from '@ui-kitten/components';
 import KeyboardAvoidingView from '@core/components/base/keyboardAvoidingView';
 import { tailwind } from '@tailwind';
 import Page from '@core/components/abstract/page'
 import { connect } from 'react-redux';
-import { BASEURL, PORT } from '@core/generated/config';
 import style from '../style';
 import Form from '@core/components/base/form';
 import ImageOverlay from '@core/components/base/imageOverlay'
 import Routes from '@core/generated/routes'
-import Button from '../../core/components/base/form/elements/button';
-import Helpers from '@helpers'
-import Preloader from '@core/components/base/preloader';
-import { setPreloader } from '@core/generated/actions';
-import LaunchScreen from './launch_screen';
-import { setAlert } from '@core/generated/actions';
-
+import Helpers from '@core/helpers';
 
 export class AuthSignin extends Page {
   constructor(_props) {
@@ -45,7 +38,7 @@ export class AuthSignin extends Page {
         style: tailwind('px-0 ml-auto mb-4'),
         appearance: "ghost",
         status: "control",
-        onPress: () => this.go(Routes.main.home)
+        onPress: () => this.go(Routes.launch.screen)
       },
       {
         elementType: Form.BaseElementTypes.Submit,
@@ -92,6 +85,15 @@ export class AuthSignin extends Page {
     //     ],
     //   });
     // }
+    this.setState({isAuthorized: true})
+    Helpers.Store.set('isAuthorized', 'true')
+    if (body) {
+      this.props.setPreloader(true)
+      setTimeout(() => {
+        this.props.setPreloader(false)
+        this.go(Routes.main.home)
+      }, 2000);
+    }
   }
 
   render() {
@@ -112,63 +114,6 @@ export class AuthSignin extends Page {
             wrapperProps={{ style: tailwind('flex-1 mt-8 px-4') }}
             elements={this.state.elements}
           />
-          {/* <Button element={{
-            title: "alert",
-            onPress: () => {
-              this.props.setAlert({
-                title: 'Удалить комментарий?',
-                buttons: [
-                  {
-                    text: 'Да',
-                    onPress: async () => {
-                    },
-                  },
-                  {
-                    text: 'Нет',
-                    style: tailwind('text-red'),
-                  },
-                ],
-              });
-            }
-          }} />
-
-          <Button element={{
-            title: "select",
-            onPress: () => {
-              this.props.setSelect({
-                list: [
-                  { title: 'Дубликат', value: 'dublicate' },
-                  { title: 'В работе', value: 'inwork' },
-                ],
-                onChange: (value) => false,
-              });
-            }
-          }} />
-
-          <Button element={{
-            title: "popup",
-            onPress: () => {
-              this.props.setPopupMenu({
-                title: 'Выберите действие:',
-                groups: [
-                  {
-                    list: [
-                      { title: 'Сохранить', onPress: () => false },
-                      { title: 'Вернуться к редактированию' },
-                      { title: 'Отменить изменения', onPress: () => false },
-                    ],
-                  },
-                ],
-              });
-            }
-          }} />
-
-          <Button element={{
-            title: "Галлерея",
-            onPress: () => {
-              this.props.setImageViewer({ images: ['https://crm.q-digital.org/assets/gentelella/public/images/logo.png', 'https://crm.q-digital.org/assets/gentelella/public/images/logo.png'], id: 0 })
-            }
-          }} /> */}
         </ImageOverlay>
       </KeyboardAvoidingView>,
     );

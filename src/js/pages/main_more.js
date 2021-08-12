@@ -12,10 +12,11 @@ import ImageOverlay from '@core/components/base/imageOverlay'
 import Icon from '@core/components/base/icon';
 import AppNavigator from '@components/menu';
 import { NativeRouter, Link } from "react-router-native";
-import Routes from '@components/routes/router';
+import HomeRoutes from '@components/routes/router';
 import Helpers from '@core/helpers';
 import { Button } from '@ui-kitten/components';
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import Routes from '@core/generated/routes'
 
 export class More extends Page {
   constructor(_props) {
@@ -49,8 +50,8 @@ export class More extends Page {
         {
           text: 'Да',
           onPress: () => {
-            // Helpers.Store.clear()
-            // BackHandler.exitApp() 
+            Helpers.Store.clear()
+            this.go(Routes.auth.signin)
           },
         },
         {
@@ -79,20 +80,31 @@ export class More extends Page {
             </View>
           </Button>
 
-          <View style={tailwind('flex-row w-full bg-white ')}>
-            <View
-              style={tailwind('bg-transparent p-4 border-t-4 justify-center items-center w-1/2')}
-            >
-              <Link to="/main/home" underlayColor="#f0f4f7">
-                <Text>Home</Text>
-              </Link>
-            </View>
-            <View
-              style={tailwind('bg-white p-4 justify-center items-center border-t-4 border-blue-600 w-1/2')}
-            >
-              <Link to="/main/more" underlayColor="#f0f4f7">
-                <Text >More</Text>
-              </Link>
+          <View style={tailwind('w-full')}>
+
+            <View style={tailwind('flex-row w-full bg-white ')}>
+              <View
+                style={tailwind('bg-transparent p-4 border-t-4 justify-center items-center  w-1/2')}
+              >
+                <Link to="/main/home" underlayColor="#f0f4f7">
+                  <Text
+                    style={this.props.isDarkTheme ? tailwind('text-white') : tailwind('text-black')}
+                  >
+                    Home
+                  </Text>
+                </Link>
+              </View>
+              <View
+                style={tailwind('bg-white p-4 justify-center items-center border-t-4 border-blue-600 w-1/2')}
+              >
+                <Link to="/main/more" underlayColor="#f0f4f7">
+                  <Text
+                    style={this.props.isDarkTheme ? tailwind('text-white') : tailwind('text-black')}
+                  >
+                    More
+                  </Text>
+                </Link>
+              </View>
             </View>
           </View>
 
