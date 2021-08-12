@@ -88,7 +88,7 @@ export class Main extends Page {
                   <Text
                     style={this.props.isDarkTheme ? tailwind('text-white') : tailwind('text-black')}
                   >
-                    Home
+                    Главная
                   </Text>
                 </Link>
               </View>
@@ -99,7 +99,7 @@ export class Main extends Page {
                 <Text
                     style={this.props.isDarkTheme ? tailwind('text-white') : tailwind('text-black')}
                   >
-                    More
+                    Еще
                   </Text>
                 </Link>
               </View>

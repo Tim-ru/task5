@@ -45,11 +45,8 @@ export class ImageView extends React.Component {
       groups: [
         {
           list: [
-            {
-              title: 'Выбрать из галереи', onPress: () => { this.addPhoto() }
-            },
-            { title: 'Сделать фото' },
-            { title: 'Отменить изменения', onPress: () => false },
+            { title: 'Выбрать из галереи', onPress: () => { this.addPhoto() } },
+            { title: 'Сделать фото', onPress: () => { this.addPhoto() } },
           ],
         },
       ],
@@ -91,7 +88,7 @@ export class ImageView extends React.Component {
           <View style={tailwind('relative h-24 w-28 mr-2')}>
             <TouchableOpacity
               style={tailwind('justify-center items-center h-24 w-28 bg-blue-600 rounded-md')}
-              onPress={this.addPhoto}
+              onPress={this.addPhotoMenu}
             >
               <Icon
                 name='plus'

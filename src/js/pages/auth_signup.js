@@ -64,7 +64,7 @@ export class AuthSignup extends Page {
 
   onSubmit = ({ body }) => {
     if (body.password === body.confirm_password) {
-      Helpers.Store.set('user', body.email, body.password)
+      Helpers.Store.set(body.email, body.password)
       this.go(Routes.main.home)
     }
   }

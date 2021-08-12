@@ -50,7 +50,7 @@ export class More extends Page {
         {
           text: 'Да',
           onPress: () => {
-            Helpers.Store.clear()
+            // Helpers.Store.clear()
             this.go(Routes.auth.signin)
           },
         },

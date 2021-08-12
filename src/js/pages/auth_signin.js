@@ -60,39 +60,11 @@ export class AuthSignin extends Page {
   }
 
   onSubmit = async ({ body }) => {
-    let url = 'https://imagesapi.osora.ru/';
     let storePassword = await Helpers.Store.get(body.email)
+    console.log(body);
+    console.log(storePassword);
     if (body.password === storePassword) {
-      this.props.setPreloader(true)
-      Helpers.fetch(url)
-        .then(response => {
-          console.log(response);
-          setTimeout(() => {
-            this.props.setPreloader(false)
-            this.go(Routes.main.home)
-          }, 2000)
-
-        })
-    }
-    //  else {
-    //   this.props.setAlert({
-    //     title: 'Неверный пароль!',
-    //     buttons: [
-    //       {
-    //         text: 'Ок',
-    //         style: tailwind('text-red'),
-    //       },
-    //     ],
-    //   });
-    // }
-    this.setState({isAuthorized: true})
-    Helpers.Store.set('isAuthorized', 'true')
-    if (body) {
-      this.props.setPreloader(true)
-      setTimeout(() => {
-        this.props.setPreloader(false)
-        this.go(Routes.main.home)
-      }, 2000);
+      this.go(Routes.main.home)
     }
   }
 
