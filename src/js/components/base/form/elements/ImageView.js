@@ -11,12 +11,32 @@ import Icon from '@core/components/base/icon';
 import FormElement from '@core/components/abstract/formElement';
 import { setAlert, setPopupMenu } from '@core/generated/actions';
 import { Button } from '@ui-kitten/components';
-import Page from '@core/components/abstract/page';
-
 
 export class ImageView extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      photo: [
+        {
+          uri: 'https://im0-tub-ru.yandex.net/i?id=0a8dc1da8b47ac63e1b06dadc55e1a3f-l&n=27&h=384&w=480',
+          key: Date.now()
+        },
+        {
+          uri: 'https://klike.net/uploads/posts/2019-06/1560329641_2.jpg',
+          key: Date.now()
+        }
+      ]
+    }
+  }
+
+  addPhoto = () => {
+    let arr = this.state.photo.concat({
+      uri: 'https://icdn.lenta.ru/images/2021/04/27/16/20210427163138131/square_320_c09ebae17387b7d6eeb9fa0d42afe5ee.jpg',
+      key: Date.now()
+    })
+    this.setState({ photo: arr })
+    console.log(this.state.photo)
   }
 
   addPhotoMenu = () => {
@@ -26,9 +46,7 @@ export class ImageView extends React.Component {
         {
           list: [
             {
-              title: 'Выбрать из галереи', onPress: () => {
-                return
-              }
+              title: 'Выбрать из галереи', onPress: () => { this.addPhoto() }
             },
             { title: 'Сделать фото' },
             { title: 'Отменить изменения', onPress: () => false },
@@ -39,16 +57,21 @@ export class ImageView extends React.Component {
   }
 
   openPhoto = () => {
-    this.props.setImageViewer({ images: ['https://crm.q-digital.org/assets/gentelella/public/images/logo.png', 'https://crm.q-digital.org/assets/gentelella/public/images/logo.png'], id: 0 })
+    let uriArray = []
+    this.state.photo.forEach((e) => {uriArray.push(e.uri)})
+    this.props.setImageViewer({ images: uriArray, id: 0 })
   }
 
-  alert = () => {
+  deleteAlert = (key) => {
     this.props.setAlert({
       title: 'Удалить фото?',
       buttons: [
         {
           text: 'Да',
-          onPress: async () => {
+          onPress: () => {
+            let arr = this.state.photo.splice(key, 1)
+            this.setState({arr})
+            console.log(key)
           },
         },
         {
@@ -68,7 +91,7 @@ export class ImageView extends React.Component {
           <View style={tailwind('relative h-24 w-28 mr-2')}>
             <TouchableOpacity
               style={tailwind('justify-center items-center h-24 w-28 bg-blue-600 rounded-md')}
-              onPress={this.addPhotoMenu}
+              onPress={this.addPhoto}
             >
               <Icon
                 name='plus'
@@ -78,69 +101,29 @@ export class ImageView extends React.Component {
             </TouchableOpacity>
           </View>
 
-          <View style={tailwind('relative h-24 w-28 mr-2 overflow-hidden rounded-md')}>
-            <TouchableOpacity onPress={this.openPhoto}>
-              <ImageBackground
-                style={tailwind('h-24 w-28 z-0')}
-                source={{ uri: 'https://icdn.lenta.ru/images/2021/04/27/16/20210427163138131/square_320_c09ebae17387b7d6eeb9fa0d42afe5ee.jpg' }}
-              >
-                <TouchableOpacity
-                  style={tailwind('absolute right-0 top-0 px-2 py-1 bg-blue-600 rounded-md')}
-                  onPress={this.alert}
-                >
-                  <Icon
-                    name='close'
-                    size={22}
-                    style={tailwind('text-white')}
-                  />
+          {this.state.photo.map((e, key) => {
+            return (
+              <View key={key} style={tailwind('relative h-24 w-28 mr-2 overflow-hidden rounded-md')}>
+                <TouchableOpacity onPress={this.openPhoto}>
+                  <ImageBackground
+                    style={tailwind('h-24 w-28 z-0')}
+                    source={{ uri: e.uri }}
+                  >
+                    <TouchableOpacity
+                      style={tailwind('absolute right-0 top-0 px-2 py-1 bg-blue-600 rounded-md')}
+                      onPress={() => this.deleteAlert(key)}
+                    >
+                      <Icon
+                        name='close'
+                        size={22}
+                        style={tailwind('text-white')}
+                      />
+                    </TouchableOpacity>
+                  </ImageBackground>
                 </TouchableOpacity>
-              </ImageBackground>
-            </TouchableOpacity>
-          </View>
-
-
-          <View style={tailwind('relative h-24 w-28 mr-2 overflow-hidden rounded-md')}>
-            <TouchableOpacity onPress={this.openPhoto}>
-              <ImageBackground
-                style={tailwind('h-24 w-28 z-0')}
-                source={{ uri: 'https://icdn.lenta.ru/images/2021/04/27/16/20210427163138131/square_320_c09ebae17387b7d6eeb9fa0d42afe5ee.jpg' }}
-              >
-                <TouchableOpacity
-                  style={tailwind('absolute right-0 top-0 px-2 py-1 bg-blue-600 rounded-md')}
-                  onPress={this.alert}
-                >
-                  <Icon
-                    name='close'
-                    size={22}
-                    style={tailwind('text-white')}
-                  />
-                </TouchableOpacity>
-              </ImageBackground>
-            </TouchableOpacity>
-          </View>
-
-
-          <View style={tailwind('relative h-24 w-28 mr-2 overflow-hidden rounded-md')}>
-            <TouchableOpacity onPress={this.openPhoto}>
-              <ImageBackground
-                style={tailwind('h-24 w-28 z-0')}
-                source={{ uri: 'https://icdn.lenta.ru/images/2021/04/27/16/20210427163138131/square_320_c09ebae17387b7d6eeb9fa0d42afe5ee.jpg' }}
-              >
-                <TouchableOpacity
-                  style={tailwind('absolute right-0 top-0 px-2 py-1 bg-blue-600 rounded-md')}
-                  onPress={this.alert}
-                >
-                  <Icon
-                    name='close'
-                    size={22}
-                    style={tailwind('text-white')}
-                  />
-                </TouchableOpacity>
-              </ImageBackground>
-            </TouchableOpacity>
-          </View>
-
-
+              </View>
+            )
+          })}
 
         </ScrollView>
       </View>

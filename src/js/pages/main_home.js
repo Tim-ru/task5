@@ -37,7 +37,7 @@ export class Main extends Page {
               { title: 'Общая', value: 'public' },
               { title: 'Приватная', value: 'private' },
             ],
-            onChange: (value) => false,
+            onChange: (value) => console.log(value),
           });
         }
       },
@@ -45,7 +45,7 @@ export class Main extends Page {
         elementType: Form.BaseElementTypes.Input,
         status: 'control',
         placeholder: 'Описание',
-        name: 'theme',
+        name: 'description',
         style: tailwind('mt-10'),
       },
       {
@@ -65,8 +65,8 @@ export class Main extends Page {
     ];
   }
 
-  onSubmit = ({ data }) => {
-    console.log(data);
+  onSubmit = ({ body }) => {
+    console.log(body);
   }
 
   render() {
@@ -92,7 +92,7 @@ export class Main extends Page {
                 style={tailwind('bg-white p-4 justify-center items-center border-t-4  w-1/2')}
               >
                 <Link to="/main/more" underlayColor="#f0f4f7">
-                  <Text >More</Text>
+                  <Text>More</Text>
                 </Link>
               </View>
             </View>

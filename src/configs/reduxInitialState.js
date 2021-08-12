@@ -7,4 +7,5 @@ module.exports = {
   imageViewer: false,
   isDarkTheme: false,
   // required end
+  photo: []
 };
