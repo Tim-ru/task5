@@ -13,8 +13,9 @@ import Icon from '@core/components/base/icon';
 import AppNavigator from '@components/menu';
 import { NativeRouter, Link } from "react-router-native";
 import Routes from '@components/routes/router';
-import Button from '@core/components/base/form/elements/button';
 import Helpers from '@core/helpers';
+import { Button } from '@ui-kitten/components';
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
 export class More extends Page {
   constructor(_props) {
@@ -65,25 +66,33 @@ export class More extends Page {
       <KeyboardAvoidingView>
         <ImageOverlay style={tailwind('flex-1 flex-col justify-end items-center')}>
 
-          <TouchableOpacity
-            style={tailwind('justify-center items-center h-24 w-28 ')}
+          <Button
             onPress={this.onExitMenu}
+            style={tailwind('justify-center items-center mb-5 w-1/2')}
           >
-            <Text>Выйти</Text>
-          </TouchableOpacity>
+            <Ionicons
+              name="log-out"
+              size={20}
+            />
+            <View style={tailwind('justify-center items-center')}>
+              <Text style={tailwind('text-white')}>Выйти</Text>
+            </View>
+          </Button>
 
-          <View style={tailwind('w-full')}>
-            <View style={tailwind('flex-row justify-around items-center w-full bg-red')}>
-              <View style={tailwind('bg-transparent p-4')}>
-                <Link to="/main/home" underlayColor="#f0f4f7">
-                  <Text>Home</Text>
-                </Link>
-              </View>
-              <View>
-                <Link to="/main/more" underlayColor="#f0f4f7">
-                  <Text >More</Text>
-                </Link>
-              </View>
+          <View style={tailwind('flex-row w-full bg-white ')}>
+            <View
+              style={tailwind('bg-transparent p-4 border-t-4 justify-center items-center w-1/2')}
+            >
+              <Link to="/main/home" underlayColor="#f0f4f7">
+                <Text>Home</Text>
+              </Link>
+            </View>
+            <View
+              style={tailwind('bg-white p-4 justify-center items-center border-t-4 border-blue-600 w-1/2')}
+            >
+              <Link to="/main/more" underlayColor="#f0f4f7">
+                <Text >More</Text>
+              </Link>
             </View>
           </View>
 

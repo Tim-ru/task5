@@ -58,6 +58,7 @@ export class Main extends Page {
         style: tailwind('mt-auto'),
         status: "control",
         size: "giant",
+        style: tailwind('mb-10'),
         onPress: this.onSubmit
       },
 
@@ -68,34 +69,28 @@ export class Main extends Page {
     console.log(data);
   }
 
-
   render() {
     return this._render(
       <KeyboardAvoidingView>
         <ImageOverlay style={tailwind('flex-1')}>
-          <View
-            style={{
-              ...tailwind('justify-center items-center'),
-              ...style.signupView,
-            }}
-          >
-            <Text style={tailwind('mt-4')} category="s1" status="control">
-              main
-            </Text>
-          </View>
           <Form
             wrapperProps={{ style: tailwind('flex-1 mt-8 px-4') }}
             elements={this.state.elements}
           />
 
           <View style={tailwind('w-full')}>
-            <View style={tailwind('flex-row justify-around items-center w-full bg-red')}>
-              <View style={tailwind('bg-transparent p-4')}>
+
+            <View style={tailwind('flex-row w-full bg-white ')}>
+              <View
+                style={tailwind('bg-transparent p-4 border-t-4 justify-center items-center border-blue-600 w-1/2')}
+              >
                 <Link to="/main/home" underlayColor="#f0f4f7">
                   <Text>Home</Text>
                 </Link>
               </View>
-              <View>
+              <View
+                style={tailwind('bg-white p-4 justify-center items-center border-t-4  w-1/2')}
+              >
                 <Link to="/main/more" underlayColor="#f0f4f7">
                   <Text >More</Text>
                 </Link>

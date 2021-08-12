@@ -3,13 +3,14 @@ import { View, Image, ScrollView, TouchableOpacity, ImageBackground, Alert } fro
 import { connect } from 'react-redux';
 import { setImageViewer } from '@core/generated/actions';
 import ImageViewerLib from 'react-native-image-zoom-viewer';
-import { Text, Button } from '@ui-kitten/components';
+import { Text } from '@ui-kitten/components';
 import { tailwind } from '@tailwind';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import Icon from '@core/components/base/icon';
 import FormElement from '@core/components/abstract/formElement';
 import { setAlert, setPopupMenu } from '@core/generated/actions';
+import { Button } from '@ui-kitten/components';
 import Page from '@core/components/abstract/page';
 
 
@@ -26,7 +27,7 @@ export class ImageView extends React.Component {
           list: [
             {
               title: 'Выбрать из галереи', onPress: () => {
-                return  
+                return
               }
             },
             { title: 'Сделать фото' },
@@ -60,67 +61,86 @@ export class ImageView extends React.Component {
 
   render() {
     return (
-      <View style={tailwind('justify-center items-center mt-4 pt-4 pb-4 border-gray-400 border-t-2 border-b-2')}>
+      <View
+        style={tailwind('justify-center items-center mt-4 mb-4 pt-4 pb-4 border-gray-400 border-t-2 border-b-2')}
+      >
         <ScrollView horizontal={true}>
           <View style={tailwind('relative h-24 w-28 mr-2')}>
             <TouchableOpacity
-              style={tailwind('justify-center items-center h-24 w-28')}
+              style={tailwind('justify-center items-center h-24 w-28 bg-blue-600 rounded-md')}
               onPress={this.addPhotoMenu}
             >
               <Icon
                 name='plus'
-                size={30}
+                size={35}
+                style={tailwind('text-white')}
               />
             </TouchableOpacity>
           </View>
 
-          <View style={tailwind('relative h-24 w-28 mr-2')}>
+          <View style={tailwind('relative h-24 w-28 mr-2 overflow-hidden rounded-md')}>
             <TouchableOpacity onPress={this.openPhoto}>
               <ImageBackground
                 style={tailwind('h-24 w-28 z-0')}
                 source={{ uri: 'https://icdn.lenta.ru/images/2021/04/27/16/20210427163138131/square_320_c09ebae17387b7d6eeb9fa0d42afe5ee.jpg' }}
               >
-                <TouchableOpacity style={tailwind('absolute right-0 top-0')} onPress={this.alert} >
+                <TouchableOpacity
+                  style={tailwind('absolute right-0 top-0 px-2 py-1 bg-blue-600 rounded-md')}
+                  onPress={this.alert}
+                >
                   <Icon
                     name='close'
-                    size={30}
+                    size={22}
+                    style={tailwind('text-white')}
                   />
                 </TouchableOpacity>
               </ImageBackground>
             </TouchableOpacity>
           </View>
 
-          <View style={tailwind('relative h-24 w-28 mr-2')}>
+
+          <View style={tailwind('relative h-24 w-28 mr-2 overflow-hidden rounded-md')}>
             <TouchableOpacity onPress={this.openPhoto}>
               <ImageBackground
                 style={tailwind('h-24 w-28 z-0')}
                 source={{ uri: 'https://icdn.lenta.ru/images/2021/04/27/16/20210427163138131/square_320_c09ebae17387b7d6eeb9fa0d42afe5ee.jpg' }}
               >
-                <TouchableOpacity style={tailwind('absolute right-0 top-0')} onPress={this.alert} >
+                <TouchableOpacity
+                  style={tailwind('absolute right-0 top-0 px-2 py-1 bg-blue-600 rounded-md')}
+                  onPress={this.alert}
+                >
                   <Icon
                     name='close'
-                    size={30}
+                    size={22}
+                    style={tailwind('text-white')}
                   />
                 </TouchableOpacity>
               </ImageBackground>
             </TouchableOpacity>
           </View>
 
-          <View style={tailwind('relative h-24 w-28 mr-2')}>
+
+          <View style={tailwind('relative h-24 w-28 mr-2 overflow-hidden rounded-md')}>
             <TouchableOpacity onPress={this.openPhoto}>
               <ImageBackground
                 style={tailwind('h-24 w-28 z-0')}
                 source={{ uri: 'https://icdn.lenta.ru/images/2021/04/27/16/20210427163138131/square_320_c09ebae17387b7d6eeb9fa0d42afe5ee.jpg' }}
               >
-                <TouchableOpacity style={tailwind('absolute right-0 top-0')} onPress={this.alert} >
+                <TouchableOpacity
+                  style={tailwind('absolute right-0 top-0 px-2 py-1 bg-blue-600 rounded-md')}
+                  onPress={this.alert}
+                >
                   <Icon
                     name='close'
-                    size={30}
+                    size={22}
+                    style={tailwind('text-white')}
                   />
                 </TouchableOpacity>
               </ImageBackground>
             </TouchableOpacity>
           </View>
+
+
 
         </ScrollView>
       </View>
