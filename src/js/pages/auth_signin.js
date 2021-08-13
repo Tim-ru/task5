@@ -78,11 +78,14 @@ export class AuthSignin extends Page {
       regData = resolve
     })
 
-    console.log(authData);
-    console.log(regData);
+    if (authData === regData) {
+      this.props.setPreloader(true)
+      setTimeout(() => {
+        this.go(Routes.main.home)
+        this.props.setPreloader(false)
+      }, 2000)
+    }
 
-    
-    
 
   }
 
