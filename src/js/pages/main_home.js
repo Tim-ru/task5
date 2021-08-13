@@ -79,7 +79,6 @@ export class Main extends Page {
           />
 
           <View style={tailwind('w-full')}>
-
             <View style={tailwind('flex-row w-full bg-white ')}>
               <View
                 style={tailwind('bg-transparent p-4 border-t-4 justify-center items-center border-blue-600 w-1/2')}

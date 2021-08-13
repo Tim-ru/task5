@@ -71,7 +71,7 @@ export class More extends Page {
             onPress={this.onExitMenu}
             style={tailwind('justify-center items-center mb-5 w-1/2')}
           >
-            <Ionicons
+            <Icon
               name="log-out"
               size={20}
             />
@@ -90,7 +90,7 @@ export class More extends Page {
                   <Text
                     style={this.props.isDarkTheme ? tailwind('text-white') : tailwind('text-black')}
                   >
-                    Home
+                    Главная
                   </Text>
                 </Link>
               </View>
@@ -101,7 +101,7 @@ export class More extends Page {
                   <Text
                     style={this.props.isDarkTheme ? tailwind('text-white') : tailwind('text-black')}
                   >
-                    More
+                    Выйти
                   </Text>
                 </Link>
               </View>
