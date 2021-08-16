@@ -17,22 +17,15 @@ export class ImageView extends React.Component {
     super(props);
 
     this.state = {
-      photo: [
-        {
-          uri: 'https://im0-tub-ru.yandex.net/i?id=0a8dc1da8b47ac63e1b06dadc55e1a3f-l&n=27&h=384&w=480',
-          key: Date.now()
-        },
-        {
-          uri: 'https://klike.net/uploads/posts/2019-06/1560329641_2.jpg',
-          key: Date.now()
-        }
-      ]
+      img0: 'https://im0-tub-ru.yandex.net/i?id=0a8dc1da8b47ac63e1b06dadc55e1a3f-l&n=27&h=384&w=480',
+      img1: 'https://klike.net/uploads/posts/2019-06/1560329641_2.jpg',
+      photo: []
     }
   }
 
-  addPhoto = () => {
+  addPhoto = (uri) => {
     let arr = this.state.photo.concat({
-      uri: 'https://icdn.lenta.ru/images/2021/04/27/16/20210427163138131/square_320_c09ebae17387b7d6eeb9fa0d42afe5ee.jpg',
+      uri: uri,
       key: Date.now()
     })
     this.setState({ photo: arr })
@@ -45,8 +38,8 @@ export class ImageView extends React.Component {
       groups: [
         {
           list: [
-            { title: 'Выбрать из галереи', onPress: () => { this.addPhoto() } },
-            { title: 'Сделать фото', onPress: () => { this.addPhoto() } },
+            { title: 'Выбрать из галереи', onPress: () => { this.addPhoto(this.state.img0) } },
+            { title: 'Сделать фото', onPress: () => { this.addPhoto(this.state.img1) } },
           ],
         },
       ],
@@ -82,7 +75,7 @@ export class ImageView extends React.Component {
   render() {
     return (
       <View
-        style={tailwind('justify-center items-center mt-4 mb-4 pt-4 pb-4 border-gray-400 border-t-2 border-b-2')}
+        style={tailwind('justify-center items-start mt-4 mb-4 pt-4 pb-4 border-gray-400 border-t-2 border-b-2')}
       >
         <ScrollView horizontal={true}>
           <View style={tailwind('relative h-24 w-28 mr-2')}>

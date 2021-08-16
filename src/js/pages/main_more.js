@@ -1,22 +1,17 @@
 import React from 'react';
-import { View, Image, ScrollView, TouchableOpacity, ImageBackground, Alert, BackHandler } from 'react-native';
+import { View } from 'react-native';
 import { Text } from '@ui-kitten/components';
 import KeyboardAvoidingView from '@core/components/base/keyboardAvoidingView';
 import { tailwind } from '@tailwind';
 import Page from '@core/components/abstract/page'
 import { connect } from 'react-redux';
-import { BASEURL, PORT } from '@core/generated/config';
-import style from '../style';
 import Form from '@core/components/base/form';
 import ImageOverlay from '@core/components/base/imageOverlay'
 import Icon from '@core/components/base/icon';
-import AppNavigator from '@components/menu';
-import { NativeRouter, Link } from "react-router-native";
-import HomeRoutes from '@components/routes/router';
 import Helpers from '@core/helpers';
 import { Button } from '@ui-kitten/components';
-import Ionicons from 'react-native-vector-icons/Ionicons'
 import Routes from '@core/generated/routes'
+import TabMenu from '@components/base/form/elements/menu';
 
 export class More extends Page {
   constructor(_props) {
@@ -39,7 +34,6 @@ export class More extends Page {
           });
         }
       },
-
     ];
   }
 
@@ -67,46 +61,29 @@ export class More extends Page {
       <KeyboardAvoidingView>
         <ImageOverlay style={tailwind('flex-1 flex-col justify-end items-center')}>
 
-          <Button
-            onPress={this.onExitMenu}
-            style={tailwind('justify-center items-center mb-5 w-1/2')}
-          >
-            <Icon
-              name="log-out"
-              size={20}
-            />
-            <View style={tailwind('justify-center items-center')}>
-              <Text style={tailwind('text-white')}>Выйти</Text>
-            </View>
-          </Button>
-
-          <View style={tailwind('w-full')}>
-
-            <View style={tailwind('flex-row w-full bg-white ')}>
-              <View
-                style={tailwind('bg-transparent p-4 border-t-4 justify-center items-center  w-1/2')}
-              >
-                <Link to="/main/home" underlayColor="#f0f4f7">
-                  <Text
-                    style={this.props.isDarkTheme ? tailwind('text-white') : tailwind('text-black')}
-                  >
-                    Главная
-                  </Text>
-                </Link>
+          <View style={tailwind('justify-center items-center mb-5 w-full px-2')}>
+            <Button
+              onPress={this.onExitMenu}
+              style={tailwind('justify-center items-center w-full ')}
+            >
+              <View>
+                <Icon
+                  name="sign-out"
+                  size={20}
+                  style={tailwind('text-white')}
+                />
               </View>
-              <View
-                style={tailwind('bg-white p-4 justify-center items-center border-t-4 border-blue-600 w-1/2')}
-              >
-                <Link to="/main/more" underlayColor="#f0f4f7">
-                  <Text
-                    style={this.props.isDarkTheme ? tailwind('text-white') : tailwind('text-black')}
-                  >
-                    Выйти
-                  </Text>
-                </Link>
+
+              <View style={tailwind('justify-center items-center ')}>
+                <Text style={tailwind('text-white ml-2')}>Выйти</Text>
               </View>
-            </View>
+
+            </Button>
           </View>
+
+          <TabMenu
+            {...this}
+          />
 
         </ImageOverlay>
       </KeyboardAvoidingView>

@@ -16,18 +16,12 @@ export class LaunchScreen extends Page {
     let isAuthorized = await Helpers.Store.get('isAuthorized')
     if (isAuthorized === 'true') {
       setTimeout(() => this.go(Routes.main.home), 1000);
-    } else if (await Helpers.Store.get('user')) {
-      setTimeout(() => Helpers.historyReplace(Routes.auth.signin, this.props.history), 1000);
     } else {
-      setTimeout(() => Helpers.historyReplace(Routes.auth.signup, this.props.history), 1000);
+      setTimeout(() => Helpers.historyReplace(Routes.auth.signin, this.props.history), 1000);
     }
   };
 
-  // style={
-  //   this.props.isDarkTheme === false ?
-  //     tailwind('justify-center items-center flex-1 bg-launchScreenBackground') :
-  //     tailwind('justify-center items-center flex-1 bg-pink-800')
-  // }
+
 
   render() {
     return (
